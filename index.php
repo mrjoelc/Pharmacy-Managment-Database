@@ -82,14 +82,24 @@
 				?>
 	</head>
 	<body style="background-color: #f2f2f2;">
+		
 		<div class="container">
-			<div class="row center" style="background-color: #f2f2f2;">
+			<!-- Sezione Header e Navbar -->
+			<div class="row lato-SX" style="background-color: #5eba24;">
 				<h1 class="main-heading">Gestionale Posizione Farmacia</h1>
 			</div>
+			
+			<ul>
+				<li style="margin-right:100px"><a href="#">Aggiungi Azienda</a></li>
+				<li><a href="#">Aggiungi Farmaco</a></li>
+				<li><a href="#">Cerca Farmaco</a></li>
+			</ul>
+
+			<!-- Sezione Ricerca -->
 			<div class="row center" style="background-color: #f2f2f2;">
-				<p class="description">Trova il farmaco, cerca utilizzando il nome del farmaco oppure l'azienda produttrice</p>
+				<p class="description">Trova il farmaco, cerca utilizzando il nome del farmaco, l'azienda produttrice oppure per categoria</p>
 			</div>
-			<hr />
+
 			<div class="row center" style="background-color: #f2f2f2;">
 				<form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
 					<input type="text" class=" search-bar-index " name="searchWord" id="searchBox" placeholder="Inserisci nome Farmaco o Azienda "/>
@@ -112,6 +122,8 @@
 				<br />
 			</div>
 		</div>
+		
+		<!-- Sezione Risultati -->
 		<div class="container" style="margin-top:-50px;">
 			<div class="row center" style="background-color: #f2f2f2;">
 				<?php
@@ -127,7 +139,7 @@
 					if (isset($farmaci)) {
 						if ($farmaci) {
 							foreach ($farmaci as $farmaco) {
-								echo "<a class='link-farm center' href='index.php'}'>{$farmaco['nomeFarmaco']}, {$farmaco['nomeAzienda']}</a>";
+								echo "<a class='link-farm center' href='index.php'}>{$farmaco['nomeFarmaco']}, {$farmaco['nomeAzienda']}</a>";
 							}	
 						} else {
 							echo "<br /><h1 class='center'>Nessun risultato con la seguente";
@@ -142,6 +154,7 @@
 			</div>
 			<div style="width:100%; height:150px"></div>
 		</div>
+
 	</body>
 
 	<script src="../js/index.js"></script>

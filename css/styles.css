@@ -79,35 +79,57 @@ header img {
 	
 }
 
+/**Title**/
+.main-heading{
+	color: #335e90;
+}
+
+.center {
+    display: flex;
+	justify-content: center;
+}
+
+.lato-DX {
+    display: flex;
+	justify-content: flex-end;
+}
+
+.lato-SX {
+    display: flex;
+	justify-content: flex-start;
+}
+
 ul {
-    list-style-type: none;
-    margin: 0px;
-    padding: 0px;
-    overflow: hidden;
-	font-size: 20px;
-	font-weight: bold;
-	height: auto;
-	width:100%;
-    text-align:center;
-}
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #5eba24;
+  }
+  
+  li {
+	float: right;
+  }
+  
+  li a {
+	display: block;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	
+	padding: 15px;
+  }
+  
+  li a:hover {
+	background-color: rgb(98, 211, 104);
+	border-top-left-radius: 100%;
+	border-top-right-radius: 100%;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
 
-li {
-	display:inline-block;
-	margin: auto;
-}
+  }
+  
 
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 20px;
-	margin-bottom: 10px;
-    text-decoration: none;
-}
-
-li a:hover:not(.decorated) {
-	color: #0d4762;
-}
 
 .btn {
 		padding: 0px;
@@ -133,7 +155,7 @@ li a:hover:not(.decorated) {
 	
 	padding-top: 10px;
 	padding-bottom: 10px;
-	background-color: #fafafa;
+	background-color: #c6e7c9;
 }
 
 .main-heading {
@@ -142,7 +164,7 @@ li a:hover:not(.decorated) {
 }
 
 .description {
-	font-size: 20px;
+	font-size: 17px;
 	padding: 0px 0px 0px 0px;
 }
 
