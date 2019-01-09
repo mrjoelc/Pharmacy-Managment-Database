@@ -3,7 +3,6 @@
 	<head>
 		<title>Gestionale Posizione Farmacia</title>
 		<!--External stylesheet links-->
-		<!-- <link rel="stylesheet" href="../css/index.css?<?php echo time(); ?>"> -->
 		<link rel="stylesheet" href="../css/styles.css?<?php echo time(); ?>">
 	
 
@@ -14,14 +13,15 @@
 	<body>
 		
 		<div class="container">
-			<!-- Sezione Header e Navbar -->
+			<!-- Sezione LOGO-->
 			<div class="headerCustom">
 				<img class='logo' src="../img/logo.png">
 				<h1 class="main-heading">Gestionale Posizione Farmacia</h1>
 			</div>
-			
-			<!-- Sezione NAVBAR -->
-			<div id='navbarDiv'>
+		</div>
+
+		<!-- Sezione NAVBAR -->
+		<div id='navbarDiv'>
 				<ul>
 					<li class='active last-item-navbar'><a href="#">Gestione Aziende</a>
 					<ul class="dropdown">
@@ -39,14 +39,12 @@
 					<li class='first-item-navbar'><a href="index.php">Cerca</a></li>
 				</ul>
 			</div> 
-
-			<!-- Sezione Ricerca -->
-			<div class="row center" style="background-color: #b4c0b4;">
-				<p class="description">Aggiungi una nuova azienda farmaceutica nel sistema</p>
-			</div>
-
 		
-		</div>
+
+		<!-- Sezione RICERCA -->
+			<div class="row" style="background-color: #b4c0b4;">
+				<p style='text-align: center;'class="description">Cerca e rimuovi una azienda nel sistema</p>
+			</div>
 
 	</body>
 

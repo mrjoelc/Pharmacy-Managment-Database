@@ -6,11 +6,11 @@
 	font-size: 20px;
 	padding-top: 2px;
 	padding-bottom: 2px;
-	color: #57B7E4;
+	color: #004770;
 }
 
 .link-farm:hover {
-	color: #004770;
+	color: 	rgb(95, 84, 61);
 }
 
 .main-results {
@@ -24,8 +24,6 @@
 	margin: 0px 200px 0px 200px;
 }
 
-
-
 /* Radio button filtro Azienda / Farmacia */
 
 input[type=radio] {
@@ -36,7 +34,7 @@ input[type=radio] {
 
 label {
 	font-family: 'Julius Sans One', sans-serif;
-	color: #888;
+	color: rgb(240, 238, 238);
 	display: inline-block;
 	cursor: pointer;
 	font-weight: light;
@@ -44,16 +42,17 @@ label {
 }
 
 input[type=radio]:checked + label {
-	background-color: #0d4762;
+	background-color: rgb(86, 143, 72);
 	color: white;
 }
 
 /* label + input[type=radio] + label {
 	border-left: 2px solid #89cff0;
+	rgb(209,181,122)
 } */
 
 .radio-group {
-	border: 1px solid #5eba24;
+	border: 1px solid #7ca87f;
 	display: inline-block;
 	border-radius: 5px;
 	overflow: hidden;
@@ -64,33 +63,36 @@ input[type=radio]:checked + label {
     font-family: 'Julius Sans One', sans-serif;
     width: 123px;
 	border-radius: 5px 5px 5px 5px;
-	background-color: #5eba24;
-	border: 2px solid #c6e7c9;
+	background-color: rgb(86, 143, 72)	;
+	border: 1px solid #7ca87f;
 	height:30px;
 	font-size: 16px;
 	font-weight: light;
 	color: white;
 	cursor: pointer;
 }
-
 .search-button-mini:hover {
-	background-color: #0d4762;
-	border: 2px solid #0d4762;
+	background-color: rgb(95, 84, 61);
+	border: 1px solid #345f3f;
 }
 
 .search-bar-index {
 	text-align: center;
 	width: 662px;
 	border-radius: 5px 5px 5px 5px;
-	border: 2px solid #c6e7c9;
 	height: 30px;
 	font-size: 16px;
 	padding: 10px;
 	margin-right: 10px;
 }
 
+input.search-bar-index {
+	background-color:#e0dfd2;
+    color: #423f25;
+}
+
 .search-bar-index:hover {
-	border: 2px solid #0d4762;
+	border: 2px solid rgb(95, 84, 61);
 }
 
 .center {
@@ -135,11 +137,11 @@ input[type=radio]:checked + label {
 		background: #89cff0;
 		border-radius: 5px;
 		cursor: pointer;
-		background-color: #0d4762;
+		background-color: rgb(86, 143, 72);
 }
 
 .custom-select-trigger:hover {
-	background-color: #0d4762;
+	background-color: rgb(95, 84, 61);
 }
 		
 .custom-select-trigger:after {
@@ -173,7 +175,7 @@ input[type=radio]:checked + label {
 	  border: 1px solid #888;
 	  border-radius: 5px;
 	  box-sizing: border-box;
-	  box-shadow: 0 2px 1px rgba(0,0,0,.07);
+	  box-shadow: 0 2px 1px rgba(94, 47, 47, 0.07);
 	  background: #fff;
 	  transition: all .2s ease-in-out;
 	  
@@ -233,11 +235,9 @@ input[type=radio]:checked + label {
 }
 	  
 .custom-option:hover, .custom-option.selection {
-		background: #f9f9f9;
+		background: rgb(95, 84, 61);
+		color: #b4c0b4;
 }
 
-/**Title**/
-.main-heading{
-	color: #335e90;
-}
+
 

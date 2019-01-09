@@ -1,3 +1,4 @@
+//Menu' tendina per selezione categoria ricerca
 $(".custom-select").each(function() {
   var classes = $(this).attr("class"),
       id      = $(this).attr("id"),

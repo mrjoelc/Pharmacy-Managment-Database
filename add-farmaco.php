@@ -1,181 +1,164 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 	<head>
-		<title>A bit about database design | Bookshelf</title>
-
-		<link rel="stylesheet" href="../css/styles.css">
-		<link rel="stylesheet" href="../css/design.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<title>Gestionale Posizione Farmacia</title>
+		<!--External stylesheet links-->
+		<link rel="stylesheet" href="../css/styles.css?<?php echo time(); ?>">
+		<link rel="stylesheet" href="../css/add-farmaco.css?<?php echo time(); ?>">
+		<script type="text/javascript" src="http://services.iperfect.net/js/IP_generalLib.js"></script>
 	
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="author" content="Patrick Thompson, 2nd Year Computing Student, University of Huddersfield">
-		<meta name="keywords" content="business books, self-help books, search business books, business books to read">
-		<meta name="description" content="Search business books through Bookshelf. We sell business, economics, finance,
-									      psychology, philosophy and self-help books.">
-		
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		
+
+
 		<?php
-		try {
-			$pdo = new PDO("mysql:host=localhost; dbname=", "", "");
-			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	
-			$resultset = $pdo->query("SELECT * FROM Book");
-			$books = $resultset->fetchAll();
-			
-			$resultset = $pdo->query("SELECT * FROM Author");
-			$authors = $resultset->fetchAll();
-			
-			$resultset = $pdo->query("SELECT * FROM Contributor ORDER BY bookid ASC");
-			$contributors = $resultset->fetchAll();
-			
-			$resultset = $pdo->query("SELECT * FROM Review ORDER BY bookid ASC");
-			$reviews = $resultset->fetchAll();
-		} catch (PDOException $e) {
-			echo 'Connection error: ' . $e->getMessage();
-			exit();
-		}
+			try {
+				//Connessione al DB & setup debugging mode
+				$pdo = new PDO("mysql:host=localhost; dbname=Farmacia", "root", "root");
+				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-		$pdo = null;
+				$prep_stmt=$pdo->prepare("SELECT nomeAzienda FROM Azienda");
+				$prep_stmt->execute();
+				$aziende=$prep_stmt->fetchAll();
+
+				$prep_stmt=$pdo->prepare("SELECT * FROM Scaffale");
+				$prep_stmt->execute();
+				$categorie=$prep_stmt->fetchAll();
+
+				$prep_stmt=$pdo->prepare("SELECT DISTINCT n_cass FROM Cassetto");
+				$prep_stmt->execute();
+				$cassetti=$prep_stmt->fetchAll();
+				
+				$pdo = null; 
+			}catch (PDOException $e) {
+				echo 'Connection error: '.$e->getMessage();
+				exit();
+			}
+
+			if(isset($_POST['submit'])){
+				try{
+					$pdo = new PDO("mysql:host=localhost; dbname=Farmacia", "root", "root");
+					$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+					$nomeFarmaco = $_POST['nomeFarmaco'];
+					$nomeAzienda = $_POST['nomeAzienda'];
+					$impiego = $_POST['impiego'];
+					$dataScadenza = $_POST['dataScadenza'];
+					$n_scaf = $_POST['n_scaf'];
+					$n_cass = $_POST['n_cass'];
+					
+					$stmt = $pdo->prepare("SELECT * FROM Farmaco WHERE nomeFarmaco=:nomeFarmaco AND nomeAzienda=:nomeAzienda");
+					$stmt->execute(['nomeFarmaco' => $nomeFarmaco, 'nomeAzienda' => $nomeAzienda,]); 
+					$duplicate = $stmt->fetchAll();
+					if ($duplicate) {
+						$nc = count($duplicate);
+					}
+					if($nc < 1){
+						$sqlF= "INSERT INTO Farmaco(nomeFarmaco, nomeAzienda, impiego, dataScadenza) VALUES ('$nomeFarmaco', '$nomeAzienda', '$impiego',' $dataScadenza')";
+						$sqlPF= "INSERT INTO PosizioneFarmaco(nomeFarmaco, nomeAzienda, n_cass, n_scaf) VALUES ('$nomeFarmaco', '$nomeAzienda', '$n_cass',' $n_scaf')";
+						if ($pdo->query($sqlF) && $pdo->query($sqlPF)) {
+							echo "<script type= 'text/javascript'>alert('Farmaco inserito correttamente!');</script>";
+						   } 
+						else{
+							echo "<script type= 'text/javascript'>alert('Farmaco non inserito correttamente! Riprovare.');</script>";
+						 }
+					}else{
+						echo "<script type= 'text/javascript'>alert('Farmaco non inserito! Già è presente nel sistema.');</script>";
+					 }				   
+					$pdo = null; 
+				}catch (PDOException $e) {
+					echo 'Connection error: '.$e->getMessage();
+				exit();
+				}
+			}
 		?>
+
 	</head>
-	<body style="background-color: #f2f2f2;">
-		<header>
-			<ul class="gradient">
-			  <!--<li><img src="../res/img/book-logo.png" style="width: 70px; height: 70px; padding: 0px; margin: 0px;">--></li>
-			  <li style="padding-top: 10px;"><a href="design.php"><i class="fa fa-paint-brush fa-2x"></i> Design</a></li>
-			  <li style="padding-top: 10px;"><a href="index.php"><i class="fa fa-search fa-2x"></i> Search</a></li>
-			</ul>
-		</header>
+	<body>
+		
 		<div class="container">
-			<div class="row" style="background-color: #f2f2f2;">
-				<h1 class="main-heading">Business Books Search Engine</h1>
-				<h6 class="description">A bit about my chosen scenario...</h6>
-				<br />
-				<br />
-				<p>My chosen scenario was to develop a simple search engine for fictitious company called Bookshelf.
-				   Bookshelf sells business, finance and self-help books to the mass market.</p>
-				<br />
-				<p>The search engine is able to search the companies database of books by title.
-				   Additonal filters are available to narrow down search results with users have the ability to filter by book category.</p>
-				<br />
-				<br />
-				<br />
-				<br />
-				<h1>Class Diagram</h1>
-				<img src="../res/img/classdiagram.PNG" />
-				<br />
-				<br />
-				<br />
-				<br />
-				<h1>Physical Data Model</h1>
-				<img src="../res/img/database.PNG" />
-				<br /><br /><br /><br />
-				<br /><h1>Author</h1>
-				<table>
-				  <tr>
-					<th>authorid</th>
-					<th>fname</th>
-					<th>lname</th> 
-					<th>dob</th>
-					<th>locality</th>
-					<th>description</th>
-					<th>image</th>
-				  </tr>
-					<?php
-						if ($authors) {
-							foreach ($authors as $author) {
-								echo "<tr>";
-								echo "<td>".$author['authorid']."</td>
-									  <td>".$author['fname']."</td>
-									  <td>".$author['lname']."</td>
-									  <td>".$author['dob']."</td>
-									  <td>".$author['locality']."</td>
-									  <td>".$author['description']."</td>
-									  <td>".$author['image']."</td>";
-								echo "</tr>";
-							}
-						} else { echo "No data rows to report"; }
-					?>
-				</table>
-				<br /><br /><br /><br />
-				<br /><h1>Book</h1>
-				<table>
-				    <tr>
-					    <th>bookid</th>
-						<th>title</th>
-						<th>category</th> 
-						<th>pages</th>
-						<th>isbn</th>
-						<th>publisher</th>
-						<th>width</th> 
-						<th>height</th>
-						<th>style</th> 
-						<th>image</th>
-				    </tr>
-					<?php
-						if ($books) {
-							foreach ($books as $book) {
-								echo "<tr>";
-								echo "<td>".$book['bookid']."</td>
-									  <td>".$book['title']."</td>
-									  <td>".$book['category']."</td>
-									  <td>".$book['pages']."</td>
-									  <td>".$book['isbn']."</td>
-									  <td>".$book['publisher']."</td>
-									  <td>".$book['width']."</td>
-									  <td>".$book['height']."</td>
-									  <td>".$book['style']."</td>
-									  <td>".$book['image']."</td>";
-								echo "</tr>";
-							}
-						} else { echo "No data rows to report"; }
-					?>
-				</table>
-				<br /><br /><br /><br />
-				<br /><h1>Contributor</h1>
-				<table>
-				    <tr>
-					    <th>bookid</th>
-						<th>authorid</th>
-					</tr>
-					<?php
-						if ($contributors) {
-							foreach ($contributors as $contributor) {
-								echo "<tr>";
-								echo "<td>".$contributor['bookid']."</td>
-									  <td>".$contributor['authorid']."</td>";
-								echo "</tr>";
-							}
-						} else { echo "No data rows to report"; }
-					?>
-				</table>
-				<br /><br /><br /><br />
-				<br /><h1>Review</h1>
-				<table>
-					<tr>
-						<th>bookid</th>
-						<th>reviewdate</th>
-						<th>reviewer</th>
-						<th>review</th>
-						<th>rating</th>
-					</tr>
-					<?php
-						if ($reviews) {
-							foreach ($reviews as $review) {
-								echo "<tr>";
-								echo "<td>".$review['bookid']."</td>
-									  <td>".$review['reviewdate']."</td>
-									  <td>".$review['reviewer']."</td>
-									  <td>".$review['review']."</td>
-									  <td>".$review['rating']."</td>";
-								echo "</tr>";
-							}
-						} else { echo "No data rows to report"; }
-					?>
-				</table>
+			<!-- Sezione LOGO-->
+			<div class="headerCustom">
+				<img class='logo' src="../img/logo.png">
+				<h1 class="main-heading">Gestionale Posizione Farmacia</h1>
 			</div>
 		</div>
+
+		<!-- Sezione NAVBAR -->
+		<div id='navbarDiv'>
+				<ul>
+					<li class='last-item-navbar'><a href="#">Gestione Aziende</a>
+					<ul class="dropdown">
+						<li class='firstSubItem'><a href="search-azienda.php">Cerca Azienda</a></li>
+						<li><a href="add-azienda.php">Inserisci Azienda</a></li>
+						<li class='lastSubItem'><a href="rmv-azienda.php">Elimina Azienda</a></li>
+					</ul>  
+					</li>
+					<li class='active'><a href="#">Gestione Farmaci</a>
+					<ul class="dropdown">
+						<li class='firstSubItem'><a href="add-farmaco.php">Inserisci Farmaco</a></li>
+						<li class='lastSubItem'><a href="rmv-farmaco.php">Elimina Farmaco</a></li>
+					</ul>
+					</li>
+					<li class='first-item-navbar'><a href="index.php">Cerca</a></li>
+				</ul>
+			</div> 
+		
+		<form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST"> 
+			<!-- Sezione NOME FARMACO -->
+			<div class='nameContainer' style="background-color: #b4c0b4;">
+				<input required="required" type="text" class="nameBig" name="nomeFarmaco" id="searchBox" placeholder="Inserisci nome Farmaco"/>
+			</div>
+
+			<!-- Sezione DETTAGLI FARMACO -->
+			<div id="detailsContainer">
+
+				<p class='category'>Azienda produttrice</p>
+				<div class="select-style" style='margin-bottom:10px;'>
+					<select name='nomeAzienda'>
+						<?php
+							foreach( $aziende as $azienda) 
+							echo "<option value='$azienda[nomeAzienda]'>$azienda[nomeAzienda]</option>";
+							?>
+					</select>
+				</div>
+
+				<div style='position: absolute; top:323px; right:390px;'> 
+					<p class='category'>Categoria d'appartenenza farmaco</p>
+					<div class="select-style" style='width: 400px; margin-bottom:10px;'>
+							<select name='n_scaf'>
+								<?php
+									foreach( $categorie as $categoria) 
+									echo "<option value='$categoria[n_scaf]'>$categoria[categoria]</option>";
+								?>
+							</select>
+					</div>
+				</div>
+
+				<div style='position: absolute; top:387px; right:570px;'> 
+					<p class='category'>Impiego ed utilizzo</p>
+					<input required="required" type="text" class="attributeInput" name="impiego"  style=' padding-top:8px; padding-bottom:5px; margin-bottom:10px;' placeholder="Inserisci qui"/>
+				</div>
+				
+				<div style='position: absolute; top:387px; right:395px;'> 
+					<p class='category'>Data Scadenza</p>
+					<input required="required" type="text" name="dataScadenza" class="IP_calendar dataInput" placeholder="Clicca qui" title="Y/m/d">
+				</div>
+				
+				<p class='category'>Numero cassetto</p>
+				<div class="select-style" style='margin-bottom:10px; width:110px'>
+						<select name='n_cass'>
+							<?php
+								foreach( $cassetti as $cassetto) 
+								echo "<option value='$cassetto[n_cass]'>$cassetto[n_cass]</option>";
+							?>
+						</select>
+				</div>
+				
+				<input type="submit" class="registration-button" value="Registra" name="submit"/>
+
+			</div>
+		</form>
+		
 	</body>
+
+
 </html>

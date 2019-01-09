@@ -41,7 +41,7 @@
 										$prep_stmt=$pdo->prepare("SELECT * FROM Farmaco
 																  WHERE nomeAzienda LIKE :searchWord");
 											}
-									$prep_stmt->bindValue(':searchWord', "%{$_POST['searchWord']}%");
+									$prep_stmt->bindValue(':searchWord', "%{$_POST['searchWord']}%"); //collegare parametro :searchWord alla variabile searchWord
 								}
 								//caso2
 								if ($searchWord == '' && $category != ''){
@@ -81,26 +81,47 @@
 					}
 				?>
 	</head>
-	<body style="background-color: #f2f2f2;">
+	<body>
 		
 		<div class="container">
 			<!-- Sezione Header e Navbar -->
-			<div class="row lato-SX" style="background-color: #5eba24;">
+			<div class="headerCustom">
+				<img class='logo' src="../img/logo.png">
 				<h1 class="main-heading">Gestionale Posizione Farmacia</h1>
 			</div>
 			
-			<ul>
-				<li style="margin-right:100px"><a href="#">Aggiungi Azienda</a></li>
-				<li><a href="#">Aggiungi Farmaco</a></li>
-				<li><a href="#">Cerca Farmaco</a></li>
-			</ul>
+			<!-- <ul>
+				<li class='last-item-navbar'><a href="add-azienda.php">Gestione Aziende</a></li>
+				<li><a href="add-farmaco.php">Gestione Farmaci</a></li>
+				<li class='active first-item-navbar' ><a href="index.php">Cerca</a></li>
+			</ul> -->
+
+			<!-- Sezione NAVBAR -->
+			<div id='navbarDiv'>
+				<ul>
+					<li class='last-item-navbar'><a href="#">Gestione Aziende</a>
+					<ul class="dropdown">
+						<li class='firstSubItem'><a href="search-azienda.php">Cerca Azienda</a></li>
+						<li><a href="add-azienda.php">Inserisci Azienda</a></li>
+						<li class='lastSubItem'><a href="rmv-azienda.php">Elimina Azienda</a></li>
+					</ul>  
+					</li>
+					<li><a href="#">Gestione Farmaci</a>
+					<ul class="dropdown">
+						<li class='firstSubItem'><a href="add-farmaco.php">Inserisci Farmaco</a></li>
+						<li class='lastSubItem'><a href="rmv-farmaco.php">Elimina Farmaco</a></li>
+					</ul>
+					</li>
+					<li class='active first-item-navbar'><a href="index.php">Cerca</a></li>
+				</ul>
+			</div> 
 
 			<!-- Sezione Ricerca -->
-			<div class="row center" style="background-color: #f2f2f2;">
+			<div class="row center" style="background-color: #b4c0b4;">
 				<p class="description">Trova il farmaco, cerca utilizzando il nome del farmaco, l'azienda produttrice oppure per categoria</p>
 			</div>
 
-			<div class="row center" style="background-color: #f2f2f2;">
+			<div class="row center" style="background-color: #b4c0b4;">
 				<form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
 					<input type="text" class=" search-bar-index " name="searchWord" id="searchBox" placeholder="Inserisci nome Farmaco o Azienda "/>
 					<br />
@@ -124,8 +145,8 @@
 		</div>
 		
 		<!-- Sezione Risultati -->
-		<div class="container" style="margin-top:-50px;">
-			<div class="row center" style="background-color: #f2f2f2;">
+		<div class="container" style="margin-top:-50px; background-color: #b4c0b4;">
+			<div class="row center" style="background-color: #b4c0b4;">
 				<?php
 					if (isset($noOfResults)) {
 						echo "<h1 class='main-results'>{$noOfResults} ";
@@ -134,12 +155,12 @@
 					}
 				?>
 			</div>
-			<div class="row" style="background-color: #f2f2f2;">
+			<div class="row" style="background-color: #b4c0b4;">
 				<?php
 					if (isset($farmaci)) {
 						if ($farmaci) {
 							foreach ($farmaci as $farmaco) {
-								echo "<a class='link-farm center' href='index.php'}>{$farmaco['nomeFarmaco']}, {$farmaco['nomeAzienda']}</a>";
+								echo "<a class='link-farm center' href='details.php?nameF=$farmaco[nomeFarmaco]'>{$farmaco['nomeFarmaco']}, {$farmaco['nomeAzienda']}</a>";
 							}	
 						} else {
 							echo "<br /><h1 class='center'>Nessun risultato con la seguente";

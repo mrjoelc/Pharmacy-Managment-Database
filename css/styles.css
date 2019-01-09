@@ -1,8 +1,207 @@
 body {
 	margin: 0px;
 	padding: 0px;
-	background-color: #fafafa;
+	background-color: #b4c0b4;
 }
+
+.logo {
+	margin-top: 20px; 
+	margin-left:50px; 
+	width:100px; 
+	height:100px;
+}
+
+.headerCustom {
+	background-color: rgb(32, 77, 46);
+	display: flex;
+	justify-content: flex-start;
+
+}
+
+.main-heading {
+	margin-left: 20px;
+	color: #0d4762;
+}
+
+/* NavBar */
+ #navbarDiv a {
+	text-decoration: none;
+  }
+  
+  #navbarDiv ul {
+	  list-style: none;
+	  margin: 0;
+	  padding-left: 0;
+  }
+  
+  #navbarDiv li {
+	  color: #fff;
+      background: #204d2e;
+	  display: block;
+	  float: right;
+	  padding: 1rem;
+	  position: relative;
+	  text-decoration: none;
+	  transition-duration: 0.5s;
+	  border-top-left-radius: 100%;
+	  border-top-right-radius: 100%;
+  }
+	
+  #navbarDiv li a {
+	color: #fff;
+  }
+
+  #navbarDiv li ul li a:hover {
+	color: #204d2e;
+  }
+
+  
+  #navbarDiv li:hover,
+  #navbarDiv li:focus-within {
+	  background: #94bf60;
+	  cursor: pointer;
+  }
+
+  
+  #navbarDiv li:focus-within a {
+	outline: none;
+  }
+  
+  #navbarDiv ul li ul {
+	  visibility: hidden;
+	  opacity: 0;
+	  min-width: 5rem;
+	  position: absolute;
+      transition: all 0.5s ease;
+	  margin-top: 1rem;
+	  display: none;
+
+  }
+  
+  #navbarDiv ul li:hover > ul,
+  #navbarDiv ul li:focus-within > ul,
+  #navbarDiv ul li ul:hover,
+  #navbarDiv ul li ul:focus {
+	visibility: visible;
+	opacity: 1;
+	display: block;
+  }
+  
+  #navbarDiv ul li ul li {
+	  clear: both;
+	  width: 100%;
+	  border-top-left-radius: 0%;
+	  border-top-right-radius: 0%;
+	  border: 3px solid #94bf60;
+	  border-top: 0px;
+	  border-bottom: 0px;
+	  background-color: #94bf60;
+	  text-align: center;
+  }
+
+  #navbarDiv .lastSubItem{
+	border-bottom: 3px solid #94bf60;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+  }
+
+  #navbarDiv .firstSubItem{
+	border-top-left-radius: 5px;
+  }
+
+  #navbarDiv {
+	background: #204d2e;
+	color:white;
+	padding-bottom:50px;
+  }
+
+  #navbarDiv .active {
+	color: #204d2e;
+	background-color: #b4c0b4;
+  }
+
+  .last-item-navbar {
+	margin-right:50px;
+}
+
+  .first-item-navbar {
+	width:100px;
+	text-align: center;
+}
+
+/* FINE NAVBAR */
+
+/* Vari personal */
+
+#detailsContainer {
+	padding: 20px;
+	background-color: #CDD5D1;
+	border: 10px solid #CDD5D1;
+	margin-left: 25%;
+	margin-right: 25%;
+	display: flex;
+	flex-direction: column;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+}
+
+.category {
+	font-size: 15px;
+	color: #8c977e;
+}
+
+.attribute {
+	font-size: 30px;
+	margin-bottom: 10px;
+	text-decoration: none;
+	color: #0d4762;
+}
+
+.attributeLink:hover {
+	color: #94bf60;
+}
+
+.nameContainer {
+	font-size: 18px;
+	margin-top: 2%;
+	margin-left: 25%;
+	margin-right: 25%;
+	padding: 10px;
+	border: 10px solid #CDD5D1;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+
+}
+
+.darkGreenBG {
+	background-color: #204d2e;
+}
+
+.lightGrayGreen {
+	background-color: #b4c0b4;
+}
+
+.lightGreen {
+	background-color: #94bf60;
+}
+
+.center {
+    display: flex;
+	justify-content: center;
+}
+
+.lato-DX {
+    display: flex;
+	justify-content: flex-end;
+}
+
+.lato-SX {
+    display: flex;
+	justify-content: flex-start;
+}
+
+/*  FINE VARI PERSONAL*/
+
 
 fieldset {
 	border-top: 2px solid #0d4762;
@@ -79,58 +278,6 @@ header img {
 	
 }
 
-/**Title**/
-.main-heading{
-	color: #335e90;
-}
-
-.center {
-    display: flex;
-	justify-content: center;
-}
-
-.lato-DX {
-    display: flex;
-	justify-content: flex-end;
-}
-
-.lato-SX {
-    display: flex;
-	justify-content: flex-start;
-}
-
-ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-	background-color: #5eba24;
-  }
-  
-  li {
-	float: right;
-  }
-  
-  li a {
-	display: block;
-	color: white;
-	text-align: center;
-	text-decoration: none;
-	
-	padding: 15px;
-  }
-  
-  li a:hover {
-	background-color: rgb(98, 211, 104);
-	border-top-left-radius: 100%;
-	border-top-right-radius: 100%;
-	border-bottom-left-radius: 0px;
-	border-bottom-right-radius: 0px;
-
-  }
-  
-
-
 .btn {
 		padding: 0px;
 		margin: 0px;
@@ -161,6 +308,8 @@ ul {
 .main-heading {
 	padding: 40px 0px 10px 0px;
 	font-size: 50px;
+	color: #b4c0b4;
+
 }
 
 .description {

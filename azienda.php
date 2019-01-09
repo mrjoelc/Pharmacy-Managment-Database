@@ -5,32 +5,26 @@
 		<!--External stylesheet links-->
 		<link rel="stylesheet" href="../css/styles.css?<?php echo time(); ?>">
 	
-
-		<!--JQuery import e links-->
-		<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-
 		<?php
-			if (isset($_GET['nameF'])) {
+			if (isset($_GET['nameA'])) {
 					try {
 						//Connessione al DB & setup debugging mode
 						$pdo = new PDO("mysql:host=localhost; dbname=Farmacia", "root", "root");
 						$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-						$prep_stmt=$pdo->prepare("SELECT * FROM Farmaco JOIN PosizioneFarmaco using (nomeFarmaco) JOIN Scaffale using (n_scaf)
-												  WHERE nomeFarmaco = :nameF");
+						$prep_stmt=$pdo->prepare("SELECT * FROM Azienda
+												  WHERE nomeAzienda = :nameA");
 						
-						$prep_stmt->bindValue(':nameF', "{$_GET['nameF']}");
+						$prep_stmt->bindValue(':nameA', "{$_GET['nameA']}");
 
 						$prep_stmt->execute();
-						$farmaco=$prep_stmt->fetch();
+						$azienda=$prep_stmt->fetch();
 
 					}catch (PDOException $e) {
 						echo 'Connection error: '.$e->getMessage();
 						exit();
 					}
-
 					$pdo = null; 
-		
 				}
 		?>
 
@@ -48,7 +42,7 @@
 		<!-- Sezione NAVBAR -->
 		<div id='navbarDiv'>
 				<ul>
-					<li class='last-item-navbar'><a href="#">Gestione Aziende</a>
+					<li class='active last-item-navbar'><a href="#">Gestione Aziende</a>
 					<ul class="dropdown">
 						<li class='firstSubItem'><a href="search-azienda.php">Cerca Azienda</a></li>
 						<li><a href="add-azienda.php">Inserisci Azienda</a></li>
@@ -61,39 +55,25 @@
 						<li class='lastSubItem'><a href="rmv-farmaco.php">Elimina Farmaco</a></li>
 					</ul>
 					</li>
-					<li class='active first-item-navbar'><a href="index.php">Cerca</a></li>
+					<li class='first-item-navbar'><a href="index.php">Cerca</a></li>
 				</ul>
 			</div> 
 		
 
-		<!-- Sezione NOME FARMACO -->
+		<!-- Sezione NOME AZIENDA -->
 			<div class='nameContainer' style="background-color: #b4c0b4;">
-				<?php if ($farmaco){ echo "<h1 class='center nameOf'>$farmaco[nomeFarmaco]</h1>";} 
+				<?php if ($azienda){ echo "<h1 class='center nameOf'>$azienda[nomeAzienda]</h1>";} 
 					  else { echo "<h1 class='center nameOf'>Ci deve essere un errore</h1>";} ?>
 			</div>
 
 		<!-- Sezione DETTAGLI FARMACO -->
 			<div id="detailsContainer">
+				<p class='category'>Recapito Telefonico</p>
+				<p class='attribute'> <?php echo"$azienda[recapitoTel]";?> </p>
 
-				<p class='category'>Azienda produttrice:</p>
-				<a class='attribute attributeLink' href='azienda.php?nameA=<?php echo "$farmaco[nomeAzienda]";?>'> <?php echo"$farmaco[nomeAzienda]";?> </a>
-
-				<p class='category'>Categoria d'appartenenza farmaco</p>
-				<a class='attribute'> <?php echo"$farmaco[categoria]"; ?> </a>
-
-
-				<p class='category'>Impiego ed utilizzo</p>
-				<p class='attribute'> <?php echo"$farmaco[impiego]"; ?> </p>
-
-
-				<p class='category'>Data Scadenza</p>
-				<p class='attribute'> <?php echo"$farmaco[dataScadenza]"; ?> </p>
-
-				<p class='category'>Posizione</p>
-				<p class='attribute'> Cassetto n. <?php echo"$farmaco[n_cass]";?>, Scaffale n. <?php echo"$farmaco[n_scaf]";?></p>
-				
-
-			</div>
+				<p class='category'>Email</p>
+				<p class='attribute'> <?php echo"$azienda[email]"; ?> </p>
+            </div>
 
 	</body>
 
