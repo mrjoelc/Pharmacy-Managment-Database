@@ -1,0 +1,19 @@
+.button-rmv{
+    width: 215px;
+	border-radius: 5px 5px 5px 5px;
+	background-color: rgb(32, 77, 46);
+	border: 2px solid rgb(32, 77, 46);
+	height:36px;
+	font-size: 16px;
+    color: white;
+    margin-left: 20px;
+    padding:0px;
+    cursor: pointer;
+}
+
+.button-rmv:hover{
+    background-color: #ec1414;
+    border: 2px solid #94bf60;
+    color: rgb(255, 255, 255);
+
+}

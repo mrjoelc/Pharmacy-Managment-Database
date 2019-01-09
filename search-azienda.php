@@ -5,11 +5,6 @@
 		<!--External stylesheet links-->
 		<link rel="stylesheet" href="../css/index.css?<?php echo time(); ?>">
 		<link rel="stylesheet" href="../css/styles.css?<?php echo time(); ?>">
-	
-
-		<!--JQuery import e links-->
-		<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-
 
 		<?php
 			if (isset($_POST['searchWord'])) {
@@ -75,10 +70,10 @@
 
 			<div class="row center" style="background-color: #b4c0b4;">
 				<form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
-					<input type="text" class=" search-bar-index " name="searchWord" id="searchBox" placeholder="Inserisci nome Azienda "/>
+					<input required type="text" class=" search-bar-index " name="searchWord" id="searchBox" placeholder="Inserisci nome Azienda "/>
 					<br />
 					<br />
-					<div style='display:flex; justify-content:center;'><input type="submit" class="btn search-button-mini" value="Cerca" name="submit"/></div>
+					<div style='display:flex; justify-content:center; overflow:hidden;'><input type="submit" class="btn search-button-mini" value="Cerca" name="submit"/></div>
 					
 				</form>
 				<br />
@@ -86,8 +81,8 @@
 		</div>
 		
 		<!-- Sezione Risultati -->
-		<div class="container" style="margin-top:-50px; background-color: #b4c0b4;">
-			<div class="row center" style="background-color: #b4c0b4;">
+		<div class="container" style="padding-top:0px; background-color: #b4c0b4;">
+			<div class="center" style="background-color: #b4c0b4;">
 				<?php
 					if (isset($noOfResults)) {
 						echo "<h1 class='main-results'>{$noOfResults} ";

@@ -5,7 +5,6 @@
 		<!--External stylesheet links-->
 		<link rel="stylesheet" href="../css/index.css?<?php echo time(); ?>">
 		<link rel="stylesheet" href="../css/styles.css?<?php echo time(); ?>">
-	
 
 		<!--JQuery import e links-->
 		<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
@@ -177,7 +176,6 @@
 		</div>
 
 	</body>
-
 	<script src="../js/index.js"></script>
 
 </html>

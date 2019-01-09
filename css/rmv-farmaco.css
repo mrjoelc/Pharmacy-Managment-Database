@@ -1,0 +1,48 @@
+.select-style {
+    border: 1px solid #e0dfd2;
+    width: 250px;
+    border-radius: 3px;
+    overflow: hidden;
+    background: #e0dfd2;
+    margin-bottom:35px; 
+    height: 35px;
+    display:flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.select-style select {
+    
+    font-size: 16px;
+    width: 130%;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    -webkit-appearance: none;
+    cursor: pointer;
+
+}
+
+.select-style select:focus {
+    outline: none;
+}
+
+.search-button-rmv{
+    width: 215px;
+	border-radius: 5px 5px 5px 5px;
+	background-color: rgb(32, 77, 46);
+	border: 2px solid rgb(32, 77, 46);
+	height:36px;
+	font-size: 16px;
+    color: white;
+    margin-left: 20px;
+    padding:0px;
+    cursor: pointer;
+}
+
+.search-button-rmv:hover{
+    background-color: #94bf60;
+    border: 2px solid #94bf60;
+    color: rgb(32, 77, 46);
+
+}

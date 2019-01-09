@@ -112,7 +112,7 @@
 			<div id="detailsContainer">
 
 				<p class='category'>Azienda produttrice</p>
-				<div class="select-style" style='margin-bottom:10px;'>
+				<div class="select-style" style='width:250px;'>
 					<select name='nomeAzienda'>
 						<?php
 							foreach( $aziende as $azienda) 
@@ -121,36 +121,36 @@
 					</select>
 				</div>
 
-				<div style='position: absolute; top:323px; right:390px;'> 
+				<div class='scaff'> 
 					<p class='category'>Categoria d'appartenenza farmaco</p>
 					<div class="select-style" style='width: 400px; margin-bottom:10px;'>
-							<select name='n_scaf'>
-								<?php
-									foreach( $categorie as $categoria) 
-									echo "<option value='$categoria[n_scaf]'>$categoria[categoria]</option>";
-								?>
-							</select>
+						<select name='n_scaf'>
+							<?php
+								foreach( $categorie as $categoria) 
+								echo "<option value='$categoria[n_scaf]'>$categoria[categoria]</option>";
+							?>
+						</select>
 					</div>
 				</div>
 
-				<div style='position: absolute; top:387px; right:570px;'> 
+				<div class='impiego'> 
 					<p class='category'>Impiego ed utilizzo</p>
 					<input required="required" type="text" class="attributeInput" name="impiego"  style=' padding-top:8px; padding-bottom:5px; margin-bottom:10px;' placeholder="Inserisci qui"/>
 				</div>
 				
-				<div style='position: absolute; top:387px; right:395px;'> 
+				<div class='dataPicker'> 
 					<p class='category'>Data Scadenza</p>
-					<input required="required" type="text" name="dataScadenza" class="IP_calendar dataInput" placeholder="Clicca qui" title="Y/m/d">
+					<input stylerequired="required" type="text" name="dataScadenza" class="IP_calendar dataInput" placeholder="Clicca qui" title="Y/m/d">
 				</div>
 				
 				<p class='category'>Numero cassetto</p>
-				<div class="select-style" style='margin-bottom:10px; width:110px'>
-						<select name='n_cass'>
-							<?php
-								foreach( $cassetti as $cassetto) 
-								echo "<option value='$cassetto[n_cass]'>$cassetto[n_cass]</option>";
-							?>
-						</select>
+				<div class="select-style">
+					<select name=n_cass>
+						<?php
+							foreach( $cassetti as $cassetto) 
+							echo "<option value='$cassetto[n_cass]'>$cassetto[n_cass]</option>";
+						?>
+					</select>
 				</div>
 				
 				<input type="submit" class="registration-button" value="Registra" name="submit"/>

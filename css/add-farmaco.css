@@ -12,6 +12,7 @@
 input {
 	background-color:#e0dfd2;
     color: #423f25;
+    cursor: pointer;
 }
 
 .attributeInput {
@@ -31,7 +32,7 @@ input {
 }
 
 .registration-button:hover{
-    background-color: #423f25;
+    background-color: #004770;
     color: white;
 }
 
@@ -40,7 +41,26 @@ input {
     width:140px; 
     font-size:18px;
     height:27px;
-    background-color: #423f25;
+}
+
+.dataPicker {
+    position: absolute; 
+    top:387px; 
+    right:395px;
+    
+}
+
+.impiego {
+    position: absolute; 
+    top:387px; 
+    right:570px;
+}
+
+.scaff {
+    position: absolute; 
+    top:323px; 
+    right:390px;
+    
 }
 
 .alignTwo {
@@ -53,7 +73,11 @@ input {
     width: 250px;
     border-radius: 3px;
     overflow: hidden;
-    background: #e0dfd2 url("img/icon-select.png") no-repeat 90% 50%;
+    background: #e0dfd2;
+    margin-bottom:10px; 
+    width:110px;
+    cursor: pointer;
+
 }
 
 .select-style select {
@@ -64,6 +88,7 @@ input {
     box-shadow: none;
     background: transparent;
     -webkit-appearance: none;
+    cursor: pointer;
 }
 
 .select-style select:focus {
