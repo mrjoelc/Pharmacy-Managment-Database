@@ -128,7 +128,7 @@
 					<div class="radio-group ">
 						<input checked type="radio" id="option-one" name="searchOption" value="farmaco"><label for="option-one">Farmaco</label><input type="radio" id="option-two" name="searchOption" value="azienda"><label for="option-two">Azienda</label>
 					</div>
-					 <select name="category" class="custom-select" placeholder="Tutte le categorie">
+					 <select name="category" class="custom-select " placeholder="Tutte le categorie">
 					 	<option value="">Tutte le categorie</option>
     					<option value="Sistema Cardiovascolare">Sistema Cardiovascolare</option>
     					<option value="Sistema Gastrointestinale e Metabolismo">Sistema Gastrointestinale e Metabolismo</option>
